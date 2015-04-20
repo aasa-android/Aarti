@@ -1,6 +1,7 @@
 package free.hindi.aarti;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -90,10 +91,21 @@ public class AartiActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_share) {
-            sharePost();
-            return true;
+        Intent intent;
+        switch (id){
+            case R.id.action_more_apps:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:AASA"));
+                startActivity(intent);
+                break;
+            case R.id.action_rate_us:
+                intent = new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=free.hindi.aarti"));
+                startActivity(intent);
+                break;
+            case R.id.action_share:
+                sharePost();
+                break;
+            default:
+                break;
         }
 
         return super.onOptionsItemSelected(item);

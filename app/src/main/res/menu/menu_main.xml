@@ -1,12 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="free.hindi.aarti.AartiActivity">
-
-    <item
-        android:id="@+id/action_share"
-        android:title="Share"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_share" />
+    xmlns:tools="http://schemas.android.com/tools" tools:context="free.hindi.aarti.MainActivity">
 
     <item
         android:id="@+id/action_more_apps"
