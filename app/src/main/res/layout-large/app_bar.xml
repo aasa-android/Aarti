@@ -9,7 +9,7 @@
     android:elevation="4dp">
 
     <TextView
-        android:layout_width="420dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="आरती संग्रह"
         android:textStyle="bold"
