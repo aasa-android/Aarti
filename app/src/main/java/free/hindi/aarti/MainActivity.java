@@ -30,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StartAppSDK.init(this, "102735663", "203546808", true);
-        StartAppAd.showSplash(this, savedInstanceState);
         setContentView(R.layout.activity_main);
         StartAppAd.showSlider(this);
 
