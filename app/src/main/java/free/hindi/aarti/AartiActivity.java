@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.startapp.android.publish.StartAppAd;
 
 
 public class AartiActivity extends ActionBarActivity {
@@ -24,7 +23,6 @@ public class AartiActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aarti);
-        StartAppAd.showSlider(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar_aarti);
         setSupportActionBar(toolbar);

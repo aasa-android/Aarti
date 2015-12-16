@@ -11,32 +11,43 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.startapp.android.publish.StartAppAd;
-import com.startapp.android.publish.StartAppSDK;
+import com.google.android.gms.ads.InterstitialAd;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    String[] mAarti = {"गणेश जी की आरती","अम्बे जी की आरती","रामायण जी की आरती", "हनुमान जी की आरती", "लक्ष्मी जी की आरती",
+    InterstitialAd mInterstitialAd;
+
+    String[] mAarti = {"गणेश जी की आरती", "अम्बे जी की आरती", "रामायण जी की आरती", "हनुमान जी की आरती", "लक्ष्मी जी की आरती",
             "कुंज बिहारी जी की आरती", "शिवजी की आरती"};
     int[] mGodImages = {R.drawable.ganeshji, R.drawable.ambeji, R.drawable.ramayanji, R.drawable.hanumanji,
             R.drawable.laxmiji, R.drawable.kunjji, R.drawable.shivaji};
 
-    private StartAppAd startAppAd = new StartAppAd(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StartAppSDK.init(this, "102735663", "203546808", true);
         setContentView(R.layout.activity_main);
-        StartAppAd.showSlider(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("");
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3297319032078557/5032280820");
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+            }
+        });
+
+        requestNewInterstitial();
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -53,6 +64,9 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, AartiActivity.class);
                 intent.putExtra("godAarti", position);
                 startActivity(intent);
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
             }
         });
 
@@ -60,8 +74,10 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        startAppAd.onBackPressed();
         super.onBackPressed();
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
     }
 
     @Override
@@ -79,13 +95,13 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         Intent intent;
-        switch (id){
+        switch (id) {
             case R.id.action_more_apps:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:AASA"));
                 startActivity(intent);
                 break;
             case R.id.action_rate_us:
-                intent = new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=free.hindi.aarti"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=free.hindi.aarti"));
                 startActivity(intent);
                 break;
             default:
@@ -93,5 +109,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 }
