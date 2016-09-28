@@ -16,13 +16,13 @@
 
     <TextView
         android:layout_width="@dimen/god_images_size"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/god_grid_text_height"
         android:layout_below="@+id/god_image"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="@dimen/god_grid_text_size"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:padding="2dp"
+        android:padding="@dimen/god_grid_text_padding"
         android:maxLines="2"
         android:id="@+id/god_text" />
 </RelativeLayout>

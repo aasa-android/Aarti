@@ -11,15 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import com.startapp.android.publish.StartAppAd;
+import com.startapp.android.publish.StartAppSDK;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    InterstitialAd mInterstitialAd;
 
     String[] mAarti = {"गणेश जी की आरती", "अम्बे जी की आरती", "रामायण जी की आरती", "हनुमान जी की आरती", "लक्ष्मी जी की आरती",
             "कुंज बिहारी जी की आरती", "शिवजी की आरती"};
@@ -37,21 +33,8 @@ public class MainActivity extends ActionBarActivity {
 
         getSupportActionBar().setTitle("");
 
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3297319032078557/5032280820");
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                requestNewInterstitial();
-            }
-        });
-
-        requestNewInterstitial();
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        StartAppSDK.init(this, "203546808", false);
+        StartAppAd.disableSplash();
 
         GridView mAartiList = (GridView) findViewById(R.id.aarti_list);
 
@@ -64,20 +47,16 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, AartiActivity.class);
                 intent.putExtra("godAarti", position);
                 startActivity(intent);
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
+                StartAppAd.showAd(getApplicationContext());
             }
         });
-
     }
 
     @Override
     public void onBackPressed() {
+        StartAppAd.onBackPressed(this);
         super.onBackPressed();
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
+
     }
 
     @Override
@@ -89,9 +68,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         Intent intent;
@@ -109,12 +85,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-
-        mInterstitialAd.loadAd(adRequest);
     }
 }

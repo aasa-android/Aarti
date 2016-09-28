@@ -10,27 +10,25 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <com.startapp.android.publish.banner.Banner
+        android:id="@+id/startAppBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        android:layout_centerHorizontal="true" />
 
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/aarti_list"
-        android:layout_above="@+id/adView"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:numColumns="2"
+        android:layout_above="@+id/startAppBanner"
         android:columnWidth="@dimen/god_images_size"
         android:gravity="center"
-        android:verticalSpacing="4dp"
+        android:verticalSpacing="@dimen/main_grid_vertical_spacing"
         android:stretchMode="columnWidth"
         android:layout_below="@+id/app_bar"
         android:layout_alignParentRight="true"

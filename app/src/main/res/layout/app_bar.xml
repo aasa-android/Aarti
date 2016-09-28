@@ -9,12 +9,12 @@
     android:elevation="4dp">
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="आरती संग्रह"
         android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="32sp"
+        android:textSize="@dimen/app_bar_text_size"
         android:gravity="center"
         android:id="@+id/textView"
         android:layout_centerHorizontal="true" />
